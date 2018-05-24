@@ -135,7 +135,7 @@ class App extends Component {
               </div>
 
               <button onClick={ () => this.getTopTracks() }>
-                Check Top Artists
+                Check Top Tracks
               </button>
 
               <div>
