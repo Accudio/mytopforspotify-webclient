@@ -1,0 +1,27 @@
+{
+  "name": "my-top-spotify-web-client",
+  "version": "0.1.0",
+  "description": "React-based web client for My Top Spotify by Alistair Shepherd",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Accudio/my-top-spotify-web-client.git"
+  },
+  "author": "Alistair Shepherd <alistair@accudio.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Accudio/my-top-spotify-server/issues"
+  },
+  "homepage": "https://github.com/Accudio/my-top-spotify-web-client#readme",
+  "dependencies": {
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-scripts": "1.1.4",
+    "spotify-web-api-js": "^0.24.0"
+  }
+}

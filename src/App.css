@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  margin: 10px;
+}
+
+.album-art {
+  width: 100px;
+  height: 100px;
+  background-color: #ccc;
+}
