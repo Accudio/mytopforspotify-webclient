@@ -19,9 +19,22 @@
   },
   "homepage": "https://github.com/Accudio/my-top-spotify-web-client#readme",
   "dependencies": {
+    "autoprefixer": "^8.6.2",
+    "granim": "^1.1.1",
+    "grunt": "^1.0.3",
+    "grunt-contrib-imagemin": "^2.0.1",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-postcss": "^0.9.0",
+    "imagemin-gifsicle": "^5.2.0",
+    "imagemin-mozjpeg": "^7.0.0",
+    "imagemin-pngquant": "^5.1.0",
+    "postcss-normalize": "^5.0.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-granim": "^1.1.0",
     "react-scripts": "1.1.4",
+    "simplebar": "^2.6.1",
     "spotify-web-api-js": "^0.24.0"
   }
 }

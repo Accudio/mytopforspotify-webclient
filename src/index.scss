@@ -1,0 +1,33 @@
+@import-normalize;
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  font-family: sans-serif;
+
+  #root {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.simplebar-scroll-content {
+  min-width: 100.3% !important;
+}
+
+.simplebar-track {
+  &.horizontal {
+    display: none;
+  }
+  // .simplebar-scrollbar:before {
+  //   background-color: #fff;
+  // }
+}
