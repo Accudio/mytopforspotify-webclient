@@ -9,6 +9,9 @@ export default {
     });
   },
   genresToString(a) {
+    if(a.length === 0) {
+      return ['No genre data', false];
+    }
     for(let i = 0; i < a.length; i++) {
       let genre = a[i].split(' ');
       for(let j = 0; j < genre.length; j++) {
@@ -16,6 +19,6 @@ export default {
       }
       a[i] = genre.join(' ')
     }
-    return a.join(', ');
+    return [a.join(', '), true];
   }
 }

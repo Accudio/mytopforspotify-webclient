@@ -10,6 +10,9 @@ import Util from './util';
 import Background from './Background';
 import './App.css';
 
+import AlbumPlaceholder from './img/albumPlaceholder.png'
+import ArtistPlaceholder from './img/artistPlaceholder.png'
+
 const spotifyApi = new SpotifyWebApi();
 
 function TrackItem(props) {
@@ -18,7 +21,18 @@ function TrackItem(props) {
   const artists = Util.artistsToString(props.obj.artists);
   const genres = Util.genresToString(props.obj.genres);
   const url = props.obj.external_urls.spotify;
-  const albumArt = props.obj.album.images[0].url;
+  let albumArt = null;
+  let imageH = null;
+  let imageStyle = null;
+  const imageW = 10;
+  if(typeof props.obj.album.images[0] !== 'undefined') {
+    albumArt = props.obj.album.images[0].url;
+    imageH = (imageW/props.obj.album.images[0].width)*props.obj.album.images[0].height;
+    imageStyle = {width: imageW+'rem', height: imageH+'rem'};
+  } else {
+    albumArt = AlbumPlaceholder;
+    imageStyle = {width: imageW+'rem', height: imageW+'rem', opacity: 0.6};
+  }
   return (
     <li>
       <div className="list-item">
@@ -29,14 +43,49 @@ function TrackItem(props) {
           <div className="artist-album">
             {artists} &bull; {album}
           </div>
-          <div className="genres">
-            {genres}
+          <div className={"genres" + (genres[1] ? '' : ' none')}>
+            {genres[0]}
           </div>
           <div className="link">
             <a href={url} target="_blank">Open in Spotify</a>
           </div>
         </div>
-        <img src={albumArt} alt={album + 'Album Art'} className="album-art" />
+        <img src={albumArt} alt={album + 'Album Art'} className="image" style={imageStyle} />
+      </div>
+    </li>
+  );
+}
+function ArtistItem(props) {
+  const name = props.obj.name;
+  const genres = Util.genresToString(props.obj.genres);
+  const url = props.obj.external_urls.spotify;
+  let image = null;
+  let imageH = null;
+  let imageStyle = null;
+  const imageW = 10;
+  if(typeof props.obj.images[0] !== 'undefined') {
+    image = props.obj.images[0].url;
+    imageH = (imageW/props.obj.images[0].width)*props.obj.images[0].height;
+    imageStyle = {width: imageW+'rem', height: imageH+'rem'};
+  } else {
+    image = ArtistPlaceholder;
+    imageStyle = {width: imageW+'rem', height: imageW+'rem', opacity: 0.6};
+  }
+  return (
+    <li>
+      <div className="list-item">
+        <div className="list-text">
+          <div className="name">
+            <span>{name}</span>
+          </div>
+          <div className={"genres" + (genres[1] ? '' : ' none')}>
+            {genres[0]}
+          </div>
+          <div className="link">
+            <a href={url} target="_blank">Open in Spotify</a>
+          </div>
+        </div>
+        <img src={image} alt={name + 'Image'} className="image" style={imageStyle} />
       </div>
     </li>
   );
@@ -51,12 +100,15 @@ class App extends Component {
     const token = params.access_token;
     if (token) {
       spotifyApi.setAccessToken(token);
+      console.log(token)
     }
     this.state = {
       loggedIn: token ? true : false,
-      numResults: {value: 10, label: 'Top 10 tracks'},
+      numResults: {value: 10, label: 'Top 10'},
       timeRange: {value: 'medium_term', label: 'in the past 6 Months'},
-      topTracks: null,
+      topTracks: {numResults: null, timeRange: null, data: null},
+      topArtists: {numResults: null, timeRange: null, data: null},
+      isArtists: false,
       background: {
         element: '#background',
         opacity: [1,1],
@@ -78,7 +130,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getTopTracks(this.state.numResults.value, this.state.timeRange.value);
+    this.getTop(this.state.numResults.value, this.state.timeRange.value, this.state.isArtists);
+    this.getTop(this.state.numResults.value, this.state.timeRange.value, !this.state.isArtists);
   }
 
   getHashParams() {
@@ -92,6 +145,11 @@ class App extends Component {
     return hashParams;
   }
 
+  nowIsArtist(a) {
+    this.setState({isArtists: a})
+    this.getTop(this.state.numResults.value, this.state.timeRange.value, a);
+  }
+
   setNumResults = (numResults) => {
     this.setState({numResults});
     if ((
@@ -100,7 +158,8 @@ class App extends Component {
         && this.state.timeRange
         && typeof this.state.timeRange.value !== 'undefined'
       )) {
-      this.getTopTracks(numResults.value, this.state.timeRange.value);
+      this.getTop(numResults.value, this.state.timeRange.value, this.state.isArtists);
+      this.getTop(numResults.value, this.state.timeRange.value, !this.state.isArtists);
     }
   }
 
@@ -112,29 +171,72 @@ class App extends Component {
         && timeRange
         && typeof timeRange.value !== 'undefined'
       )) {
-      this.getTopTracks(this.state.numResults.value, timeRange.value);
+      this.getTop(this.state.numResults.value, timeRange.value, this.state.isArtists);
+      this.getTop(this.state.numResults.value, timeRange.value, !this.state.isArtists);
     }
   }
 
-  getTopTracks(numResults, timeRange) {
-    console.log('Making request for '+numResults+' '+timeRange+' results.');
-    spotifyApi.getMyTopTracks({limit: numResults, time_range: timeRange})
-      .then((response) => {
-        let topTracks = response.items;
-        let artists = [];
-        for(var i = 0; i < response.items.length; i++ ) {
-          artists.push(response.items[i].artists[0].id)
-        };
-        spotifyApi.getArtists(artists)
+  isNew(numResults, timeRange, type) {
+    if(type) {
+      if(numResults === this.state.topArtists.numResults && timeRange === this.state.topArtists.timeRange) {
+        console.log('Query for '+numResults+' '+timeRange+' artists matches existing.');
+        return false;
+      } else {
+        console.log('Making request for '+numResults+' '+timeRange+' artists.');
+        return true;
+      }
+    } else {
+      if(numResults === this.state.topTracks.numResults && timeRange === this.state.topTracks.timeRange) {
+        console.log('Query for '+numResults+' '+timeRange+' tracks matches existing.');
+        return false;
+      } else {
+        console.log('Making request for '+numResults+' '+timeRange+' tracks.');
+        return true;
+      }
+    }
+  }
+
+  getTop(numResults, timeRange, type) {
+    if(type) {
+      if(this.isNew(numResults, timeRange, type)) {
+        spotifyApi.getMyTopArtists({limit: numResults, time_range: timeRange})
           .then((response) => {
-            for(var j = 0; j < response.artists.length; j++ ) {
-              topTracks[j].genres = response.artists[j].genres
+            if (response.items.length !== 0) {
+              let topArtists = response.items;
+              this.setState({topArtists: {numResults: numResults, timeRange: timeRange, data: topArtists}})
+            } else {
+              console.log('request failed')
             }
-            this.setState({topTracks: topTracks});
+          }, (err) => {
+            console.log('error');
           });
-      }, (err) => {
-        console.log('error');
-      });
+      }
+    } else {
+      if(this.isNew(numResults, timeRange, type)) {
+        spotifyApi.getMyTopTracks({limit: numResults, time_range: timeRange})
+          .then((response) => {
+            if (response.items.length !== 0) {
+              let topTracks = response.items;
+              let artists = [];
+              for(var i = 0; i < response.items.length; i++ ) {
+                artists.push(response.items[i].artists[0].id)
+              };
+              console.log(artists);
+              spotifyApi.getArtists(artists)
+                .then((response) => {
+                  for(var j = 0; j < response.artists.length; j++ ) {
+                    topTracks[j].genres = response.artists[j].genres
+                  }
+                  this.setState({topTracks: {numResults: numResults, timeRange: timeRange, data: topTracks}});
+                });
+            } else {
+              console.log('request failed')
+            }
+          }, (err) => {
+            console.log('error');
+          });
+      }
+    }
   }
 
   loadMore = () => {
@@ -154,13 +256,13 @@ class App extends Component {
         break;
       default:
     }
-    let newResultLabel = 'Top '+newResult+' tracks';
+    let newResultLabel = 'Top '+newResult+' tracks/artists';
     this.setState({numResults: {value: newResult, label: newResultLabel}})
-    this.getTopTracks(newResult, this.state.timeRange.value);
+    this.getTop(newResult, this.state.timeRange.value, this.state.isArtists);
   }
 
   render() {
-    const { numResults, timeRange, topTracks } = this.state;
+    const { numResults, timeRange, topTracks, topArtists } = this.state;
 
     return (
       <div className='app'>
@@ -172,6 +274,14 @@ class App extends Component {
             <a href='http://localhost:8888/login'>Login to Spotify</a>
           </div>
         </div>
+        <div className="tabs">
+          <button className={"tab" + (this.state.isArtists ? '' : ' active')} onClick={() => {this.nowIsArtist(false)}}>
+            Top Tracks
+          </button>
+          <button className={"tab" + (this.state.isArtists ? ' active' : '')} onClick={() => {this.nowIsArtist(true)}}>
+            Top Artists
+          </button>
+        </div>
         <div className="page-wrap">
 
           <div className="config-options">
@@ -181,12 +291,13 @@ class App extends Component {
                 value={numResults}
                 onChange={this.setNumResults}
                 options={[
-                  {value: 10, label: 'Top 10 tracks'},
-                  {value: 20, label: 'Top 20 tracks'},
-                  {value: 50, label: 'Top 50 tracks'},
+                  {value: 10, label: 'Top 10'},
+                  {value: 20, label: 'Top 20'},
+                  {value: 50, label: 'Top 50'},
                 ]}
                 autoBlur
                 clearable={false}
+                searchable={false}
               />
               <Select
                 name="time-range"
@@ -200,6 +311,7 @@ class App extends Component {
                 ]}
                 autoBlur
                 clearable={false}
+                searchable={false}
               />
           </div>
 
@@ -207,13 +319,26 @@ class App extends Component {
             <div className="page-content">
               { this.state.loggedIn &&
                 <div>
-                  <ol className="results">
-                    { this.state.topTracks &&
-                      topTracks.map((object, i) => {
-                        return <TrackItem obj={ object } key={ object.id } />
-                      })
+                  <div className="result-list">
+                    { this.state.isArtists && 
+                      <ol className="results">
+                        { this.state.topArtists.data &&
+                          topArtists.data.map((object, i) => {
+                            return <ArtistItem obj={ object } key={ object.id } />
+                          })
+                        }
+                      </ol>
                     }
-                  </ol>
+                    { !this.state.isArtists &&
+                      <ol className="results">
+                        { this.state.topTracks.data &&
+                          topTracks.data.map((object, i) => {
+                            return <TrackItem obj={ object } key={ object.id } />
+                          })
+                        }
+                      </ol>
+                    }
+                  </div>
                   { numResults.value < 50 &&
                     <button className="view-more" onClick={this.loadMore}>
                       View More

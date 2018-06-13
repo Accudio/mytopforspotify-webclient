@@ -1,8 +1,12 @@
 .app {
   width: 100%;
+  width: 70vw;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
   padding: 6rem 0 0;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 .app .navigation {
   position: absolute;
@@ -24,10 +28,35 @@
   height: 100%;
   color: #fff;
 }
+.app .tabs {
+  display: flex;
+  justify-content: space-around;
+}
+.app .tabs .tab {
+  flex: 1;
+  margin: 0 3rem;
+  padding: .7rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  background-color: #191414;
+  font-variant: small-caps;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #eeeeee;
+  box-shadow: inset 0px 0px 0px -2px #1DB954;
+  transition: box-shadow .4s;
+}
+.app .tabs .tab:hover {
+  box-shadow: inset 0px -4px 0px -2px rgba(29, 185, 84, 0.5);
+}
+.app .tabs .tab.active {
+  box-shadow: inset 0px -4px 0px -2px #1DB954;
+}
 .app .page-wrap {
-  height: 100%;
-  width: 70vw;
-  margin: 0 auto;
+  flex: 1;
   background-color: rgba(25, 20, 20, 0.6);
   border: 2px solid #191414;
   border-bottom: none;
@@ -36,12 +65,14 @@
   flex-direction: column;
 }
 .app .page-wrap .config-options {
-  padding: 1rem;
-  display: flex;
-  border-bottom: 2px solid #191414;
+  padding: 1rem 1rem 0;
 }
 .app .page-wrap .config-options .Select {
-  flex: 1;
+  width: 49%;
+  float: left;
+}
+.app .page-wrap .config-options .Select:nth-child(even) {
+  float: right;
 }
 .app .page-wrap .config-options .Select .Select-control {
   background: none;
@@ -50,8 +81,12 @@
 .app .page-wrap .config-options .Select .Select-control .Select-input > input {
   color: #ffffff;
 }
+.app .page-wrap .config-options .Select .Select-control .Select-input:focus {
+  background: none;
+}
 .app .page-wrap .config-options .Select .Select-control .Select-value-label {
   color: #ffffff !important;
+  font-size: 1.2rem;
 }
 .app .page-wrap .config-options .Select .Select-control .Select-arrow {
   border-color: rgba(255, 255, 255, 0.7) transparent transparent;
@@ -99,6 +134,7 @@
 }
 .app .page-wrap .page .page-content .results > li .list-item .list-text .name {
   font-weight: bold;
+  font-size: 1.2rem;
 }
 .app .page-wrap .page .page-content .results > li .list-item .list-text .name span {
   display: inline-block;
@@ -113,9 +149,11 @@
   left: 0;
   background-color: #ffffff;
 }
-.app .page-wrap .page .page-content .results > li .list-item .album-art {
-  width: 10rem;
-  height: 10rem;
+.app .page-wrap .page .page-content .results > li .list-item .list-text .genres.none {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.6);
+}
+.app .page-wrap .page .page-content .results > li .list-item .image {
   margin-left: auto;
 }
 .app .page-wrap .page .page-content .results a {
