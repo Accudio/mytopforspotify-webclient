@@ -8,7 +8,12 @@
   padding: 6rem 0 0;
   font-family: 'Source Sans Pro', sans-serif;
 }
-.app .navigation {
+.app .main-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.app .main-content .navigation {
   position: absolute;
   width: 100%;
   top: 0;
@@ -17,22 +22,89 @@
   background-color: #191414;
   height: 4rem;
 }
-.app .navigation .user {
+.app .main-content .navigation .user {
   margin-left: auto;
+  margin-right: 2rem;
+  position: relative;
 }
-.app .navigation .user a {
+.app .main-content .navigation .user button {
+  font-size: 1rem;
+  cursor: pointer;
+  background: none;
+  border: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 0 .5rem;
   height: 100%;
   color: #fff;
+  font-family: 'Source Sans Pro', sans-serif;
+  outline: none;
 }
-.app .tabs {
+.app .main-content .navigation .user button .fa-caret-down {
+  margin-left: .5rem;
+}
+.app .main-content .navigation .user button .user-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  margin-left: .5rem;
+  overflow: hidden;
+  opacity: .8;
+}
+.app .main-content .navigation .user button .user-image.icon {
+  border: 2px solid #ffffff;
+}
+.app .main-content .navigation .user button .user-image img {
+  width: 100%;
+  height: 100%;
+}
+.app .main-content .navigation .user .user-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #fff;
+  width: 100%;
+  border-radius: 0 0 5px 5px;
+  border: 1px solid rgba(25, 20, 20, 0.3);
+  border-top: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: all .2s;
+}
+.app .main-content .navigation .user .user-menu.active {
+  visibility: visible;
+  opacity: 1;
+}
+.app .main-content .navigation .user .user-menu ul {
+  list-style: none;
+  padding: 0;
+}
+.app .main-content .navigation .user .user-menu ul li {
+  border-bottom: 1px solid rgba(25, 20, 20, 0.1);
+}
+.app .main-content .navigation .user .user-menu ul li a {
+  display: block;
+  padding: .5rem;
+  text-align: right;
+  color: rgba(25, 20, 20, 0.9);
+  text-decoration: none;
+  transition: background .3s;
+}
+.app .main-content .navigation .user .user-menu ul li a:hover {
+  background: rgba(25, 20, 20, 0.05);
+}
+.app .main-content .navigation .user .user-menu ul li:last-child {
+  border: none;
+}
+.app .main-content .tabs {
   display: flex;
   justify-content: space-around;
 }
-.app .tabs .tab {
+.app .main-content .tabs .tab {
   flex: 1;
   margin: 0 3rem;
   padding: .7rem 0;
@@ -49,13 +121,13 @@
   box-shadow: inset 0px 0px 0px -2px #1DB954;
   transition: box-shadow .4s;
 }
-.app .tabs .tab:hover {
+.app .main-content .tabs .tab:hover {
   box-shadow: inset 0px -4px 0px -2px rgba(29, 185, 84, 0.5);
 }
-.app .tabs .tab.active {
+.app .main-content .tabs .tab.active {
   box-shadow: inset 0px -4px 0px -2px #1DB954;
 }
-.app .page-wrap {
+.app .main-content .page-wrap {
   flex: 1;
   background-color: rgba(25, 20, 20, 0.6);
   border: 2px solid #191414;
@@ -64,83 +136,88 @@
   display: flex;
   flex-direction: column;
 }
-.app .page-wrap .config-options {
+.app .main-content .page-wrap .config-options {
   padding: 1rem 1rem 0;
 }
-.app .page-wrap .config-options .Select {
+.app .main-content .page-wrap .config-options .Select {
   width: 49%;
   float: left;
 }
-.app .page-wrap .config-options .Select:nth-child(even) {
+.app .main-content .page-wrap .config-options .Select:nth-child(even) {
   float: right;
 }
-.app .page-wrap .config-options .Select .Select-control {
+.app .main-content .page-wrap .config-options .Select .Select-control {
   background: none;
   border: rgba(255, 255, 255, 0.7) solid 1px;
 }
-.app .page-wrap .config-options .Select .Select-control .Select-input > input {
+.app .main-content .page-wrap .config-options .Select .Select-control .Select-input > input {
   color: #ffffff;
 }
-.app .page-wrap .config-options .Select .Select-control .Select-input:focus {
+.app .main-content .page-wrap .config-options .Select .Select-control .Select-input:focus {
   background: none;
 }
-.app .page-wrap .config-options .Select .Select-control .Select-value-label {
+.app .main-content .page-wrap .config-options .Select .Select-control .Select-value-label {
   color: #ffffff !important;
   font-size: 1.2rem;
 }
-.app .page-wrap .config-options .Select .Select-control .Select-arrow {
+.app .main-content .page-wrap .config-options .Select .Select-control .Select-arrow {
   border-color: rgba(255, 255, 255, 0.7) transparent transparent;
 }
-.app .page-wrap .config-options .Select.is-open .Select-arrow {
+.app .main-content .page-wrap .config-options .Select.is-open .Select-arrow {
   border-color: transparent transparent rgba(255, 255, 255, 0.7);
 }
-.app .page-wrap .page {
+.app .main-content .page-wrap .page {
   overflow-y: auto;
   flex: 1;
 }
-.app .page-wrap .page .page-content {
+.app .main-content .page-wrap .page .page-content {
   padding: 2rem 1rem;
+  opacity: 1;
+  transition: opacity .3s linear;
 }
-.app .page-wrap .page .page-content .results {
+.app .main-content .page-wrap .page .page-content.hidden {
+  opacity: 0;
+}
+.app .main-content .page-wrap .page .page-content .results {
   list-style: none;
   padding: 0;
   counter-reset: li;
 }
-.app .page-wrap .page .page-content .results > li {
+.app .main-content .page-wrap .page .page-content .results > li {
   position: relative;
-  margin-left: 4rem;
+  margin-left: 6rem;
 }
-.app .page-wrap .page .page-content .results > li:before {
+.app .main-content .page-wrap .page .page-content .results > li:before {
   content: counter(li);
   counter-increment: li;
   position: absolute;
-  left: -4rem;
+  left: -6rem;
   font-size: 6rem;
   font-weight: bold;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.3);
 }
-.app .page-wrap .page .page-content .results > li .list-item {
+.app .main-content .page-wrap .page .page-content .results > li .list-item {
   display: flex;
   text-align: right;
   padding: 0 1rem;
   margin-bottom: 2.5rem;
 }
-.app .page-wrap .page .page-content .results > li .list-item .list-text {
+.app .main-content .page-wrap .page .page-content .results > li .list-item .list-text {
   flex: 1;
   margin-right: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
-.app .page-wrap .page .page-content .results > li .list-item .list-text .name {
+.app .main-content .page-wrap .page .page-content .results > li .list-item .list-text .name {
   font-weight: bold;
   font-size: 1.2rem;
 }
-.app .page-wrap .page .page-content .results > li .list-item .list-text .name span {
+.app .main-content .page-wrap .page .page-content .results > li .list-item .list-text .name span {
   display: inline-block;
   position: relative;
 }
-.app .page-wrap .page .page-content .results > li .list-item .list-text .name span:after {
+.app .main-content .page-wrap .page .page-content .results > li .list-item .list-text .name span:after {
   content: '';
   width: 100%;
   height: 1px;
@@ -149,17 +226,17 @@
   left: 0;
   background-color: #ffffff;
 }
-.app .page-wrap .page .page-content .results > li .list-item .list-text .genres.none {
+.app .main-content .page-wrap .page .page-content .results > li .list-item .list-text .genres.none {
   font-style: italic;
   color: rgba(255, 255, 255, 0.6);
 }
-.app .page-wrap .page .page-content .results > li .list-item .image {
+.app .main-content .page-wrap .page .page-content .results > li .list-item .image {
   margin-left: auto;
 }
-.app .page-wrap .page .page-content .results a {
+.app .main-content .page-wrap .page .page-content .results a {
   color: #ffffff;
 }
-.app .page-wrap .page .page-content .view-more {
+.app .main-content .page-wrap .page .page-content .view-more {
   display: block;
   cursor: pointer;
   font-weight: bold;
@@ -169,4 +246,13 @@
   border-radius: 4px;
   padding: 1rem 5rem;
   margin: 0 auto;
+}
+.app .login .login-window {
+  visibility: hidden;
+  opacity: 0;
+  transition: all .3s;
+}
+.app .login.active .login-window {
+  visibility: visible;
+  opacity: 1;
 }

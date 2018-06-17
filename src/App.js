@@ -2,13 +2,19 @@ import React, { Component } from 'react';
 import Select from 'react-select';
 import SpotifyWebApi from 'spotify-web-api-js';
 import 'simplebar';
+
 import 'react-select/dist/react-select.css';
 import 'simplebar/dist/simplebar.css';
 
 import './fonts.css';
 import Util from './util';
 import Background from './Background';
+import Login from './Login';
 import './App.css';
+
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import faCaretDown from '@fortawesome/fontawesome-free-solid/faCaretDown'
+import faUser from '@fortawesome/fontawesome-free-solid/faUser'
 
 import AlbumPlaceholder from './img/albumPlaceholder.png'
 import ArtistPlaceholder from './img/artistPlaceholder.png'
@@ -100,10 +106,13 @@ class App extends Component {
     const token = params.access_token;
     if (token) {
       spotifyApi.setAccessToken(token);
-      console.log(token)
+      console.log('Access Token: '+token)
     }
     this.state = {
       loggedIn: token ? true : false,
+      error: null,
+      user: {username: null, image: null, url: null},
+      userMenuActive: false,
       numResults: {value: 10, label: 'Top 10'},
       timeRange: {value: 'medium_term', label: 'in the past 6 Months'},
       topTracks: {numResults: null, timeRange: null, data: null},
@@ -130,8 +139,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getTop(this.state.numResults.value, this.state.timeRange.value, this.state.isArtists);
-    this.getTop(this.state.numResults.value, this.state.timeRange.value, !this.state.isArtists);
+    if(this.state.loggedIn) {
+      this.getUser();
+      this.getTop(this.state.numResults.value, this.state.timeRange.value, this.state.isArtists);
+      this.getTop(this.state.numResults.value, this.state.timeRange.value, !this.state.isArtists);
+    } else {
+      console.log('not logged in yet');
+    }
   }
 
   getHashParams() {
@@ -143,6 +157,27 @@ class App extends Component {
       e = r.exec(q);
     }
     return hashParams;
+  }
+
+  getUser() {
+    spotifyApi.getMe()
+      .then((response) => {
+        console.log(response);
+        let username, image;
+        if(response.display_name != null) {
+          username = response.display_name;
+        } else {
+          username = response.id;
+        }
+        if(response.images.length === 0) {
+          image = null;
+        } else {
+          image = response.images[0].url;
+        }
+        this.setState({user: {username: username, image: image, url: response.external_urls.spotify}})
+      }, (err) => {
+        this.handleError(err);
+      });
   }
 
   nowIsArtist(a) {
@@ -208,7 +243,7 @@ class App extends Component {
               console.log('request failed')
             }
           }, (err) => {
-            console.log('error');
+            this.handleError(err);
           });
       }
     } else {
@@ -221,7 +256,6 @@ class App extends Component {
               for(var i = 0; i < response.items.length; i++ ) {
                 artists.push(response.items[i].artists[0].id)
               };
-              console.log(artists);
               spotifyApi.getArtists(artists)
                 .then((response) => {
                   for(var j = 0; j < response.artists.length; j++ ) {
@@ -233,9 +267,20 @@ class App extends Component {
               console.log('request failed')
             }
           }, (err) => {
-            console.log('error');
+            this.handleError(err);
           });
       }
+    }
+  }
+
+  handleError(err) {
+    switch(err.status) {
+      case 401:
+        console.log('Log in Expired');
+        this.setState({loggedIn: false, error: 401})
+        break;
+      default:
+        console.log('Error '+err.status);
     }
   }
 
@@ -262,92 +307,114 @@ class App extends Component {
   }
 
   render() {
+    let user = {greeting: null, image: null}
     const { numResults, timeRange, topTracks, topArtists } = this.state;
+    const { username, image, url } = this.state.user;
+    user.image = image;
+    user.url = url;
+    if( username === null ) {
+      user.greeting = 'Not logged in';
+    }  else {
+      user.greeting = 'Hi, '+username+'!';
+    }
 
     return (
       <div className='app'>
-
-        <Background id="background" config={ this.state.background }></Background>
-        <div className="navigation">
-          <div className="menu"></div>
-          <div className="user">
-            <a href='http://localhost:8888/login'>Login to Spotify</a>
-          </div>
-        </div>
-        <div className="tabs">
-          <button className={"tab" + (this.state.isArtists ? '' : ' active')} onClick={() => {this.nowIsArtist(false)}}>
-            Top Tracks
-          </button>
-          <button className={"tab" + (this.state.isArtists ? ' active' : '')} onClick={() => {this.nowIsArtist(true)}}>
-            Top Artists
-          </button>
-        </div>
-        <div className="page-wrap">
-
-          <div className="config-options">
-              <Select
-                name="num-results"
-                aria-label="Number of Results"
-                value={numResults}
-                onChange={this.setNumResults}
-                options={[
-                  {value: 10, label: 'Top 10'},
-                  {value: 20, label: 'Top 20'},
-                  {value: 50, label: 'Top 50'},
-                ]}
-                autoBlur
-                clearable={false}
-                searchable={false}
-              />
-              <Select
-                name="time-range"
-                aria-label="Time Range"
-                value={timeRange}
-                onChange={this.setTimeRange}
-                options={[
-                  {value: 'short_term', label: 'in the past 4 Weeks'},
-                  {value: 'medium_term', label: 'in the past 6 Months'},
-                  {value: 'long_term', label: 'of all time'},
-                ]}
-                autoBlur
-                clearable={false}
-                searchable={false}
-              />
-          </div>
-
-          <div className="page" data-simplebar>
-            <div className="page-content">
-              { this.state.loggedIn &&
-                <div>
-                  <div className="result-list">
-                    { this.state.isArtists && 
-                      <ol className="results">
-                        { this.state.topArtists.data &&
-                          topArtists.data.map((object, i) => {
-                            return <ArtistItem obj={ object } key={ object.id } />
-                          })
-                        }
-                      </ol>
-                    }
-                    { !this.state.isArtists &&
-                      <ol className="results">
-                        { this.state.topTracks.data &&
-                          topTracks.data.map((object, i) => {
-                            return <TrackItem obj={ object } key={ object.id } />
-                          })
-                        }
-                      </ol>
-                    }
-                  </div>
-                  { numResults.value < 50 &&
-                    <button className="view-more" onClick={this.loadMore}>
-                      View More
-                    </button>
-                  }
+        <div className='main-content'>
+          <Background id="background" config={ this.state.background }></Background>
+          <div className="navigation">
+            <div className="menu"></div>
+            <div className="user">
+              <button onClick={() => {this.setState({userMenuActive: !this.state.userMenuActive})}}>
+                {user.greeting}
+                <FontAwesomeIcon icon={faCaretDown} />
+                <div className={"user-image"+(user.image===null ? ' icon':'')}>
+                  { user.image != null && <img src={user.image} alt={user.name+' profile picture'}/> }
+                  { user.image === null && <FontAwesomeIcon icon={faUser} /> }
                 </div>
-              }
+              </button>
+              <div className={"user-menu"+(this.state.userMenuActive ? ' active':'')}>
+                <ul>
+                  <li><a href={user.url} target="_blank" rel="noopener noreferrer">View Profile</a></li>
+                  <li><a href="#">Log Out</a></li>
+                </ul>
+              </div>
             </div>
           </div>
+          <div className="tabs">
+            <button className={"tab" + (this.state.isArtists ? '' : ' active')} onClick={() => {this.nowIsArtist(false)}}>
+              Top Tracks
+            </button>
+            <button className={"tab" + (this.state.isArtists ? ' active' : '')} onClick={() => {this.nowIsArtist(true)}}>
+              Top Artists
+            </button>
+          </div>
+          <div className="page-wrap">
+
+            <div className="config-options">
+                <Select
+                  name="num-results"
+                  aria-label="Number of Results"
+                  value={numResults}
+                  onChange={this.setNumResults}
+                  options={[
+                    {value: 10, label: 'Top 10'},
+                    {value: 20, label: 'Top 20'},
+                    {value: 50, label: 'Top 50'},
+                  ]}
+                  autoBlur
+                  clearable={false}
+                  searchable={false}
+                />
+                <Select
+                  name="time-range"
+                  aria-label="Time Range"
+                  value={timeRange}
+                  onChange={this.setTimeRange}
+                  options={[
+                    {value: 'short_term', label: 'in the past 4 Weeks'},
+                    {value: 'medium_term', label: 'in the past 6 Months'},
+                    {value: 'long_term', label: 'of all time'},
+                  ]}
+                  autoBlur
+                  clearable={false}
+                  searchable={false}
+                />
+            </div>
+
+            <div className="page" data-simplebar>
+              <div className={"page-content"+(this.state.loggedIn ? '':' hidden')}>
+                <div className="result-list">
+                  { this.state.isArtists && 
+                    <ol className="results">
+                      { this.state.topArtists.data &&
+                        topArtists.data.map((object, i) => {
+                          return <ArtistItem obj={ object } key={ object.id } />
+                        })
+                      }
+                    </ol>
+                  }
+                  { !this.state.isArtists &&
+                    <ol className="results">
+                      { this.state.topTracks.data &&
+                        topTracks.data.map((object, i) => {
+                          return <TrackItem obj={ object } key={ object.id } />
+                        })
+                      }
+                    </ol>
+                  }
+                </div>
+                { numResults.value < 50 &&
+                  <button className="view-more" onClick={this.loadMore}>
+                    View More
+                  </button>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={"login"+(this.state.loggedIn ? '':' active')}>
+          <Login error={ this.state.error }/>
         </div>
       </div>
     )
