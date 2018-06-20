@@ -1,0 +1,74 @@
+.menu {
+  margin-right: auto;
+  margin-left: 2rem;
+  position: relative;
+}
+.menu button {
+  font-size: 1rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 .5rem;
+  height: 100%;
+  color: #ffffff;
+  font-family: 'Source Sans Pro', sans-serif;
+  outline: none;
+}
+.menu button .fa-caret-down {
+  margin-left: .5rem;
+}
+.menu button .menu-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  margin-right: .5rem;
+  overflow: hidden;
+  opacity: .8;
+}
+.menu button .menu-image.icon {
+  border: 2px solid #ffffff;
+}
+.menu .main-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  width: 100%;
+  border-radius: 0 0 5px 5px;
+  border: 1px solid rgba(25, 20, 20, 0.3);
+  border-top: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: all .2s;
+}
+.menu .main-menu.active {
+  visibility: visible;
+  opacity: 1;
+}
+.menu .main-menu ul {
+  list-style: none;
+  padding: 0;
+}
+.menu .main-menu ul li {
+  border-bottom: 1px solid rgba(25, 20, 20, 0.1);
+}
+.menu .main-menu ul li a {
+  cursor: pointer;
+  display: block;
+  padding: .5rem;
+  color: rgba(25, 20, 20, 0.9);
+  text-decoration: none;
+  transition: background .3s;
+}
+.menu .main-menu ul li a:hover {
+  background: rgba(25, 20, 20, 0.05);
+}
+.menu .main-menu ul li:last-child {
+  border: none;
+}

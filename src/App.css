@@ -21,84 +21,7 @@
   display: flex;
   background-color: #191414;
   height: 4rem;
-}
-.app .main-content .navigation .user {
-  margin-left: auto;
-  margin-right: 2rem;
-  position: relative;
-}
-.app .main-content .navigation .user button {
-  font-size: 1rem;
-  cursor: pointer;
-  background: none;
-  border: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 .5rem;
-  height: 100%;
-  color: #fff;
-  font-family: 'Source Sans Pro', sans-serif;
-  outline: none;
-}
-.app .main-content .navigation .user button .fa-caret-down {
-  margin-left: .5rem;
-}
-.app .main-content .navigation .user button .user-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 2.5rem;
-  width: 2.5rem;
-  border-radius: 50%;
-  margin-left: .5rem;
-  overflow: hidden;
-  opacity: .8;
-}
-.app .main-content .navigation .user button .user-image.icon {
-  border: 2px solid #ffffff;
-}
-.app .main-content .navigation .user button .user-image img {
-  width: 100%;
-  height: 100%;
-}
-.app .main-content .navigation .user .user-menu {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background: #fff;
-  width: 100%;
-  border-radius: 0 0 5px 5px;
-  border: 1px solid rgba(25, 20, 20, 0.3);
-  border-top: none;
-  visibility: hidden;
-  opacity: 0;
-  transition: all .2s;
-}
-.app .main-content .navigation .user .user-menu.active {
-  visibility: visible;
-  opacity: 1;
-}
-.app .main-content .navigation .user .user-menu ul {
-  list-style: none;
-  padding: 0;
-}
-.app .main-content .navigation .user .user-menu ul li {
-  border-bottom: 1px solid rgba(25, 20, 20, 0.1);
-}
-.app .main-content .navigation .user .user-menu ul li a {
-  display: block;
-  padding: .5rem;
-  text-align: right;
-  color: rgba(25, 20, 20, 0.9);
-  text-decoration: none;
-  transition: background .3s;
-}
-.app .main-content .navigation .user .user-menu ul li a:hover {
-  background: rgba(25, 20, 20, 0.05);
-}
-.app .main-content .navigation .user .user-menu ul li:last-child {
-  border: none;
+  z-index: 10;
 }
 .app .main-content .tabs {
   display: flex;
@@ -247,12 +170,32 @@
   padding: 1rem 5rem;
   margin: 0 auto;
 }
+.app .login {
+  z-index: 11;
+}
 .app .login .login-window {
   visibility: hidden;
   opacity: 0;
   transition: all .3s;
 }
 .app .login.active .login-window {
+  visibility: visible;
+  opacity: 1;
+}
+.app .modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding-top: 6rem;
+  background: rgba(25, 20, 20, 0.5);
+  z-index: 12;
+  visibility: hidden;
+  opacity: 0;
+  transition: all .5s;
+}
+.app .modal.active {
   visibility: visible;
   opacity: 1;
 }

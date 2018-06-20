@@ -10,11 +10,10 @@ import './fonts.css';
 import Util from './util';
 import Background from './Background';
 import Login from './Login';
+import Modal from './Modal';
+import MainMenu from './MainMenu';
+import UserMenu from './UserMenu';
 import './App.css';
-
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import faCaretDown from '@fortawesome/fontawesome-free-solid/faCaretDown'
-import faUser from '@fortawesome/fontawesome-free-solid/faUser'
 
 import AlbumPlaceholder from './img/albumPlaceholder.png'
 import ArtistPlaceholder from './img/artistPlaceholder.png'
@@ -118,6 +117,7 @@ class App extends Component {
       topTracks: {numResults: null, timeRange: null, data: null},
       topArtists: {numResults: null, timeRange: null, data: null},
       isArtists: false,
+      modal: null,
       background: {
         element: '#background',
         opacity: [1,1],
@@ -306,6 +306,14 @@ class App extends Component {
     this.getTop(newResult, this.state.timeRange.value, this.state.isArtists);
   }
 
+  switchUser = () => {
+    this.setState({loggedIn: false, error: 'switch'})
+  }
+
+  setModal = (url) => {
+    this.setState({modal: url});
+  }
+
   render() {
     let user = {greeting: null, image: null}
     const { numResults, timeRange, topTracks, topArtists } = this.state;
@@ -323,23 +331,8 @@ class App extends Component {
         <div className='main-content'>
           <Background id="background" config={ this.state.background }></Background>
           <div className="navigation">
-            <div className="menu"></div>
-            <div className="user">
-              <button onClick={() => {this.setState({userMenuActive: !this.state.userMenuActive})}}>
-                {user.greeting}
-                <FontAwesomeIcon icon={faCaretDown} />
-                <div className={"user-image"+(user.image===null ? ' icon':'')}>
-                  { user.image != null && <img src={user.image} alt={user.name+' profile picture'}/> }
-                  { user.image === null && <FontAwesomeIcon icon={faUser} /> }
-                </div>
-              </button>
-              <div className={"user-menu"+(this.state.userMenuActive ? ' active':'')}>
-                <ul>
-                  <li><a href={user.url} target="_blank" rel="noopener noreferrer">View Profile</a></li>
-                  <li><a href="#">Log Out</a></li>
-                </ul>
-              </div>
-            </div>
+            <MainMenu handler={this.setModal} />
+            <UserMenu user={user} handler={this.switchUser}/>
           </div>
           <div className="tabs">
             <button className={"tab" + (this.state.isArtists ? '' : ' active')} onClick={() => {this.nowIsArtist(false)}}>
@@ -415,6 +408,9 @@ class App extends Component {
         </div>
         <div className={"login"+(this.state.loggedIn ? '':' active')}>
           <Login error={ this.state.error }/>
+        </div>
+        <div className={"modal"+(this.state.modal != null ? ' active':'')}>
+          <Modal page={this.state.modal} handler={this.setModal}/>
         </div>
       </div>
     )

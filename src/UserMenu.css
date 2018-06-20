@@ -1,0 +1,79 @@
+.user {
+  margin-left: auto;
+  margin-right: 2rem;
+  position: relative;
+}
+.user button {
+  font-size: 1rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 .5rem;
+  height: 100%;
+  color: #ffffff;
+  font-family: 'Source Sans Pro', sans-serif;
+  outline: none;
+}
+.user button .fa-caret-down {
+  margin-left: .5rem;
+}
+.user button .user-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  margin-left: .5rem;
+  overflow: hidden;
+  opacity: .8;
+}
+.user button .user-image.icon {
+  border: 2px solid #ffffff;
+}
+.user button .user-image img {
+  width: 100%;
+  height: 100%;
+}
+.user .user-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #fff;
+  width: 100%;
+  border-radius: 0 0 5px 5px;
+  border: 1px solid rgba(25, 20, 20, 0.3);
+  border-top: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: all .2s;
+}
+.user .user-menu.active {
+  visibility: visible;
+  opacity: 1;
+}
+.user .user-menu ul {
+  list-style: none;
+  padding: 0;
+}
+.user .user-menu ul li {
+  border-bottom: 1px solid rgba(25, 20, 20, 0.1);
+}
+.user .user-menu ul li a {
+  display: block;
+  padding: .5rem;
+  text-align: right;
+  color: rgba(25, 20, 20, 0.9);
+  text-decoration: none;
+  transition: background .3s;
+  cursor: pointer;
+}
+.user .user-menu ul li a:hover {
+  background: rgba(25, 20, 20, 0.05);
+}
+.user .user-menu ul li:last-child {
+  border: none;
+}

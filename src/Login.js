@@ -1,39 +1,44 @@
 import React, { Component } from 'react';
 
-//import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-//import faUser from '@fortawesome/fontawesome-free-solid/faUser'
-
 import './fonts.css';
 import './Login.css';
 
 class Login extends Component {
+  constructor(){
+    super();
+    this.state = {
+      button: 'Log in to Spotify',
+      host: 'http://localhost:8888',
+      text: 'Text on first login'
+    }
+  }
+
   render() {
-    let loginText;
-    if(this.props.error === null) {
-      loginText = 'Text on first login';
-    } else {
+    let {button, text} = this.state;
+    let url = this.state.host+'/login';
+    if(this.props.error != null) {
       switch(this.props.error) {
         case 401:
-          loginText = 'Your session has expired, please log in again.';
+          text = 'Your session has expired, please log in again.';
+          break;
+        case "switch":
+          text = 'Text for switching user';
+          button = 'Switch User';
+          url = 'http://localhost:8888/switchuser';
           break;
         default:
-          loginText = 'Generic error text';
+          text = 'Generic error text';
       }
     }
 
     return (
       <div className="login-window">
         <div className="login-wrap">
-          {/*<div className="login-user">
-            <div className="user-icon">
-              <FontAwesomeIcon icon={faUser} size="4x" />
-            </div>
-          </div>*/}
           <h1 className="title">
-            My Top Spotify
+            My Top for Spotify
           </h1>
-          <p>{loginText}</p>
-          <a href="http://localhost:8888/login" className="login-button">Log in to Spotify</a>
+          <p>{text}</p>
+          <a href={url} className="login-button">{button}</a>
         </div>
       </div>
     )
