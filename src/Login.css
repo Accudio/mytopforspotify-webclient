@@ -13,6 +13,7 @@
   width: 30rem;
   max-width: 95vw;
   height: 35rem;
+  max-height: 95vh;
   background: #191414;
   border-radius: 7px;
   box-shadow: 0 0 15px 6px rgba(25, 20, 20, 0.6);
