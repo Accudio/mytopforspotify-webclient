@@ -1,14 +1,27 @@
 @import 'variables';
 
 .app {
-  width: 100%;
-  width: 70vw;
   height: 100%;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  padding: 6rem 0 0;
+  padding-top: 4rem;
   font-family: 'Source Sans Pro', sans-serif;
+
+  width: 100%;
+  @media screen and (min-width: 576px) {
+    width: 540px;
+    padding-top: 6rem;
+  }
+  @media screen and (min-width: 768px) {
+    width: 720px;
+  }
+  @media screen and (min-width: 992px) {
+    width: 960px;
+  }
+  @media screen and (min-width: 1200px) {
+    width: 1140px;
+  }
 
   .main-content {
     display: flex;
@@ -24,6 +37,19 @@
       background-color: $black;
       height: 4rem;
       z-index: 10;
+
+      .site-title {
+        cursor: default;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-family: 'Vollkorn', serif;
+        font-size: 1.5rem;
+        margin-left: auto;
+        margin-right: auto;
+        color: $white;
+      }
     }
 
     .tabs {
@@ -31,7 +57,6 @@
       justify-content: space-around;
       .tab {
         flex: 1;
-        margin: 0 3rem;
         padding: .7rem 0;
         display: flex;
         justify-content: center;
@@ -45,6 +70,10 @@
         color: $offwhite;
         box-shadow: inset 0px 0px 0px -2px $green;
         transition: box-shadow .4s;
+        @media screen and (min-width: 576px) {
+          margin: 0 3%;
+        }
+
 
         &:hover {
           box-shadow: inset 0px -4px 0px -2px rgba($green, .5);
@@ -68,8 +97,13 @@
       .config-options {
         padding: 1rem 1rem 0;
         .Select {
-          width: 49%;
           float: left;
+          width: 100%;
+          margin-bottom: .3rem;
+          @media screen and (min-width: 576px) {
+            width: 49%;
+            margin-bottom: 0;
+          }
 
           &:nth-child(even) {
             float: right;
@@ -123,30 +157,47 @@
 
             >li {
               position: relative;
-              margin-left: 6rem;
+              margin-left: 1rem;
+              @media screen and (min-width: 576px) {
+                margin-left: 6rem;
+              }
 
               &:before {
                 content: counter(li);
                 counter-increment: li;
                 position: absolute;
-                left: -6rem;
                 font-size: 6rem;
                 font-weight: bold;
                 color: rgba($white, .3);
+                left: -1rem;
+                @media screen and (min-width: 576px) {
+                  left: -2rem;
+                }
               }
 
               .list-item {
                 display: flex;
-                text-align: right;
-                padding: 0 1rem;
+                padding-left: 1rem;
                 margin-bottom: 2.5rem;
+
+                flex-flow: column-reverse;
+                @media screen and (min-width: 576px) {
+                  flex-flow: row;
+                  padding-right: 1rem;
+                }
 
                 .list-text {
                   flex: 1;
-                  margin-right: 1rem;
                   display: flex;
                   flex-direction: column;
                   justify-content: space-around;
+                  margin-top: 1rem;
+                  text-align: center;
+                  @media screen and (min-width: 576px) {
+                    margin-top: 0;
+                    text-align: right;
+                    margin-right: 1rem;
+                  }
 
                   .name {
                     font-weight: bold;
@@ -175,6 +226,10 @@
                 }
                 .image {
                   margin-left: auto;
+                  margin-right: auto;
+                  @media screen and (min-width: 576px) {
+                    margin-right: 0;
+                  }
                 }
               }
             }
@@ -219,12 +274,16 @@
     left: 0;
     width: 100%;
     height: 100%;
-    padding-top: 6rem;
     background: rgba($black, .5);
     z-index: 12;
     visibility: hidden;
     opacity: 0;
     transition: all .5s;
+    padding-top: 2rem;
+
+    @media screen and (min-width: 576px) {
+      padding-top: 6rem;
+    }
 
     &.active {
       visibility: visible;

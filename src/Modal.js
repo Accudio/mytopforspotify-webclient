@@ -15,7 +15,7 @@ class Modal extends Component {
   render() {
     return (
       <div className="modal-wrap">
-        { this.props.page == 'about' &&
+        { this.props.page === 'about' &&
           <div className="modal-page" data-simplebar>
             <button className="modal-close" onClick={() => {this.props.handler(null)}}>
               <FontAwesomeIcon icon={faTimes} size="lg"/>
@@ -26,7 +26,7 @@ class Modal extends Component {
               </div>
           </div>
         }
-        { this.props.page == 'terms' &&
+        { this.props.page === 'terms' &&
           <div className="modal-page" data-simplebar>
             <button className="modal-close" onClick={() => {this.props.handler(null)}}>
               <FontAwesomeIcon icon={faTimes} size="lg"/>

@@ -33,8 +33,10 @@ class UserMenu extends Component {
     return (
       <div className="user">
         <button onClick={() => {this.setState({menuActive: !this.state.menuActive})}}>
-          {user.greeting}
-          <FontAwesomeIcon icon={faCaretDown} />
+          <span className="user-text">
+            {user.greeting}
+            <FontAwesomeIcon icon={faCaretDown} />
+          </span>
           <div className={"user-image"+(user.image===null ? ' icon':'')}>
             { user.image != null && <img src={user.image} alt={user.name+' profile picture'}/> }
             { user.image === null && <FontAwesomeIcon icon={faUser} /> }

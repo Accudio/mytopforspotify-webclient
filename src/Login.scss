@@ -9,10 +9,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba($black,.5);
+  background: rgba($black,.6);
 
   .login-wrap {
     width: 30rem;
+    max-width: 95vw;
     height: 35rem;
     background: $black;
     border-radius: 7px;

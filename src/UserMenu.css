@@ -1,7 +1,13 @@
 .user {
   margin-left: auto;
-  margin-right: 2rem;
-  position: relative;
+  margin-right: .5rem;
+}
+@media screen and (min-width: 576px) {
+  .user {
+    margin-right: 2rem;
+    min-width: 13.1rem;
+    position: relative;
+  }
 }
 .user button {
   font-size: 1rem;
@@ -17,7 +23,16 @@
   font-family: 'Source Sans Pro', sans-serif;
   outline: none;
 }
-.user button .fa-caret-down {
+.user button .user-text {
+  display: none;
+  margin-right: .5rem;
+}
+@media screen and (min-width: 576px) {
+  .user button .user-text {
+    display: inline;
+  }
+}
+.user button .user-text .fa-caret-down {
   margin-left: .5rem;
 }
 .user button .user-image {
@@ -27,7 +42,6 @@
   height: 2.5rem;
   width: 2.5rem;
   border-radius: 50%;
-  margin-left: .5rem;
   overflow: hidden;
   opacity: .8;
 }
@@ -42,14 +56,22 @@
   position: absolute;
   top: 100%;
   right: 0;
-  background: #fff;
+  background: #191414;
   width: 100%;
+  min-width: 10rem;
   border-radius: 0 0 5px 5px;
-  border: 1px solid rgba(25, 20, 20, 0.3);
-  border-top: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   visibility: hidden;
   opacity: 0;
   transition: all .2s;
+}
+@media screen and (min-width: 576px) {
+  .user .user-menu {
+    background: #ffffff;
+    border: 1px solid rgba(25, 20, 20, 0.3);
+    border-top: none;
+  }
 }
 .user .user-menu.active {
   visibility: visible;
@@ -60,19 +82,35 @@
   padding: 0;
 }
 .user .user-menu ul li {
-  border-bottom: 1px solid rgba(25, 20, 20, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+@media screen and (min-width: 576px) {
+  .user .user-menu ul li {
+    border-bottom: 1px solid rgba(25, 20, 20, 0.1);
+  }
 }
 .user .user-menu ul li a {
+  cursor: pointer;
   display: block;
-  padding: .5rem;
+  padding: 1rem;
   text-align: right;
-  color: rgba(25, 20, 20, 0.9);
+  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
   transition: background .3s;
-  cursor: pointer;
+}
+@media screen and (min-width: 576px) {
+  .user .user-menu ul li a {
+    color: rgba(25, 20, 20, 0.9);
+    padding: .5rem;
+  }
 }
 .user .user-menu ul li a:hover {
-  background: rgba(25, 20, 20, 0.05);
+  background: rgba(255, 255, 255, 0.05);
+}
+@media screen and (min-width: 576px) {
+  .user .user-menu ul li a:hover {
+    background: rgba(25, 20, 20, 0.05);
+  }
 }
 .user .user-menu ul li:last-child {
   border: none;

@@ -2,8 +2,13 @@
 
 .menu {
   margin-right: auto;
-  margin-left: 2rem;
-  position: relative;
+  margin-left: .5rem;
+
+  @media screen and (min-width: 576px) {
+    margin-left: 2rem;
+    min-width: 12.7rem;
+    position: relative;
+  }
 
   button {
     font-size: 1rem;
@@ -19,8 +24,15 @@
     font-family: 'Source Sans Pro', sans-serif;
     outline: none;
 
-    .fa-caret-down {
+    .menu-text {
+      display: none;
       margin-left: .5rem;
+      @media screen and (min-width: 576px) {
+        display: inline;
+      }
+      .fa-caret-down {
+        margin-left: .5rem;
+      }
     }
 
     .menu-image {
@@ -30,7 +42,6 @@
       height: 2.5rem;
       width: 2.5rem;
       border-radius: 50%;
-      margin-right: .5rem;
       overflow: hidden;
       opacity: .8;
 
@@ -44,14 +55,21 @@
     position: absolute;
     top: 100%;
     left: 0;
-    background: #fff;
+    background: $black;
     width: 100%;
+    min-width: 15rem;
     border-radius: 0 0 5px 5px;
-    border: 1px solid rgba($black, .3);
-    border-top: none;
+    border-top: 1px solid rgba($white, .3);
+    border-bottom: 1px solid rgba($white, .3);
     visibility: hidden;
     opacity: 0;
     transition: all .2s;
+
+    @media screen and (min-width: 576px) {
+      background: $white;
+      border: 1px solid rgba($black, .3);
+      border-top: none;
+    }
 
     &.active {
       visibility: visible;
@@ -63,18 +81,29 @@
       padding: 0;
 
       li {
-        border-bottom: 1px solid rgba($black, .1);
+        border-bottom: 1px solid rgba($white, .1);
+        @media screen and (min-width: 576px) {
+          border-bottom: 1px solid rgba($black, .1);
+        }
 
         a {
           cursor: pointer;
           display: block;
-          padding: .5rem;
-          color: rgba($black, .9);
+          padding: 1rem;
+          color: rgba($white, .9);
           text-decoration: none;
           transition: background .3s;
 
+          @media screen and (min-width: 576px) {
+            color: rgba($black, .9);
+            padding: .5rem;
+          }
+
           &:hover {
-            background: rgba($black, .05);
+            background: rgba($white, .05);
+            @media screen and (min-width: 576px) {
+              background: rgba($black, .05);
+            }
           }
         }
 

@@ -7,10 +7,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(25, 20, 20, 0.5);
+  background: rgba(25, 20, 20, 0.6);
 }
 .login-window .login-wrap {
   width: 30rem;
+  max-width: 95vw;
   height: 35rem;
   background: #191414;
   border-radius: 7px;

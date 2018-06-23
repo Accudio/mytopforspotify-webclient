@@ -332,6 +332,7 @@ class App extends Component {
           <Background id="background" config={ this.state.background }></Background>
           <div className="navigation">
             <MainMenu handler={this.setModal} />
+            <div className="site-title">My Top for Spotify</div>
             <UserMenu user={user} handler={this.switchUser}/>
           </div>
           <div className="tabs">

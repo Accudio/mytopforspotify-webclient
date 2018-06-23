@@ -1,7 +1,27 @@
 .modal-wrap {
   height: 100%;
-  width: 70vw;
   margin: 0 auto;
+  width: 95%;
+}
+@media screen and (min-width: 576px) {
+  .modal-wrap {
+    width: 558px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .modal-wrap {
+    width: 744px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .modal-wrap {
+    width: 976px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .modal-wrap {
+    width: 1170px;
+  }
 }
 .modal-wrap .modal-page {
   height: 100%;

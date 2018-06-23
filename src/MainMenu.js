@@ -32,8 +32,10 @@ class MainMenu extends Component {
           <div className="menu-image icon">
             <FontAwesomeIcon icon={faBars} />
           </div>
-          My Top for Spotify
-          <FontAwesomeIcon icon={faCaretDown} />
+          <span className="menu-text">
+            About
+            <FontAwesomeIcon icon={faCaretDown} />
+          </span>
         </button>
         <div className={"main-menu"+(this.state.menuActive ? ' active':'')}>
           <ul>
