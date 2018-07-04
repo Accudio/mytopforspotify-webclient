@@ -15,7 +15,7 @@ class Login extends Component {
     super();
     this.state = {
       button: 'Log in to Spotify',
-      url: 'http://localhost:8888/',
+      url: 'https://login.mytopspotify.io/',
       text: 'Your most played tracks and artists on Spotify in four weeks,  six months, all time!',
       text2: 'Login below to get started'
     }
