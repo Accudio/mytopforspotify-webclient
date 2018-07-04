@@ -107,6 +107,11 @@
     background: rgba(25, 20, 20, 0.05);
   }
 }
+.menu .main-menu ul li a span {
+  color: rgba(25, 20, 20, 0.4);
+  position: absolute;
+  right: .8rem;
+}
 .menu .main-menu ul li:last-child {
   border: none;
 }

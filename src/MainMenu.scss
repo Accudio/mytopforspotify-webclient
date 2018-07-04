@@ -105,6 +105,12 @@
               background: rgba($black, .05);
             }
           }
+
+          span {
+            color: rgba($black, .4);
+            position: absolute;
+            right: .8rem;
+          }
         }
 
         &:last-child {
