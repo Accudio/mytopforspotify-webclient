@@ -37,7 +37,6 @@
     "postcss-normalize": "^5.0.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-granim": "^1.1.0",
     "react-onclickoutside": "^6.7.1",
     "react-scripts": "1.1.4",
     "react-select": "^1.2.1",
