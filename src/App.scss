@@ -290,5 +290,25 @@
       visibility: visible;
       opacity: 1;
     }
+
+    /* Modal pages */
+    h1, h2, h3, h4, h5 {
+      font-family: 'vollkorn';
+      margin: 1.5rem 0 .5rem;
+    }
+
+    p {
+      margin: .5rem 0;
+    }
+
+    a {
+      color: currentColor;
+    }
+    ol {
+      margin: 1rem 0;
+      li {
+        margin-bottom: .5rem;
+      }
+    }
   }
 }

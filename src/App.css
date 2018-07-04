@@ -268,6 +268,7 @@
   opacity: 0;
   transition: all .5s;
   padding-top: 2rem;
+  /* Modal pages */
 }
 @media screen and (min-width: 576px) {
   .app .modal {
@@ -277,4 +278,20 @@
 .app .modal.active {
   visibility: visible;
   opacity: 1;
+}
+.app .modal h1, .app .modal h2, .app .modal h3, .app .modal h4, .app .modal h5 {
+  font-family: 'vollkorn';
+  margin: 1.5rem 0 .5rem;
+}
+.app .modal p {
+  margin: .5rem 0;
+}
+.app .modal a {
+  color: currentColor;
+}
+.app .modal ol {
+  margin: 1rem 0;
+}
+.app .modal ol li {
+  margin-bottom: .5rem;
 }
