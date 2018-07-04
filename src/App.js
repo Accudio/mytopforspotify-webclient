@@ -314,6 +314,10 @@ class App extends Component {
     this.setState({modal: url});
   }
 
+  switchClose = () => {
+    this.setState({loggedIn: true})
+  }
+
   render() {
     let user = {greeting: null, image: null}
     const { numResults, timeRange, topTracks, topArtists } = this.state;
@@ -408,7 +412,7 @@ class App extends Component {
           </div>
         </div>
         <div className={"login"+(this.state.loggedIn ? '':' active')}>
-          <Login error={ this.state.error }/>
+          <Login error={ this.state.error } handler={this.setModal} switchClose={this.switchClose} />
         </div>
         <div className={"modal"+(this.state.modal != null ? ' active':'')}>
           <Modal page={this.state.modal} handler={this.setModal}/>

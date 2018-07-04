@@ -40,7 +40,9 @@ class MainMenu extends Component {
         <div className={"main-menu"+(this.state.menuActive ? ' active':'')}>
           <ul>
             <li><a role="button" onClick={() => {this.modalUrl('about')}}>About My Top for Spotify</a></li>
-            <li><a role="button" onClick={() => {this.modalUrl('terms')}}>Terms</a></li>
+            <li><a role="button" onClick={() => {this.modalUrl('contact')}}>Contact</a></li>
+            <li><a role="button" onClick={() => {this.modalUrl('privacy')}}>Privacy Policy</a></li>
+            <li><a role="button" onClick={() => {this.modalUrl('eula')}}>EULA</a></li>
             <li><a href="#">Donate</a></li>
             <li><a href="#">Made by Alistair Shepherd</a></li>
           </ul>

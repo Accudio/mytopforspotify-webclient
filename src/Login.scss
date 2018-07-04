@@ -12,6 +12,7 @@
   background: rgba($black,.6);
 
   .login-wrap {
+    position: relative;
     width: 30rem;
     max-width: 95vw;
     height: 35rem;
@@ -30,7 +31,30 @@
     }
 
     p {
-      margin: auto 0;
+      font-size: 1.2rem;
+      &:first-of-type {
+        margin-bottom: 1rem;
+      }
+      &:last-of-type {
+        margin-top: 1rem;
+      }
+      &:first-of-type {
+        margin-top: auto;
+      }
+      &:last-of-type {
+        margin-bottom: auto;
+      }
+    }
+
+    .close-button {
+      position: absolute;
+      right: .1rem;
+      top: 0rem;
+      border: none;
+      padding: 1rem;
+      background: none;
+      color: rgba($white, .5);
+      cursor: pointer;
     }
 
     .login-button {
@@ -50,6 +74,54 @@
 
       &:hover {
         background: #118e3d;
+      }
+    }
+
+    .login-footer {
+      color: rgba($white, .6);
+      font-size: .8rem;
+      margin-top: 1rem;
+
+      a {
+        color: currentColor;
+        text-decoration: underline;
+        cursor: pointer;
+        transition: color .3s;
+        &:hover {
+          color: rgba($white, .8);
+        }
+      }
+
+      .links {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        margin-top: .3rem;
+        li {
+          margin-right: .25rem;
+          &:after {
+            content: '\2014';
+            margin-left: .25rem;
+          }
+          &:last-child {
+            margin-right: 0;
+            &:after {
+              content: '';
+            }
+          }
+        }
+      }
+
+      .icons {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+
+        li {
+          margin: 0 .5rem .3rem;
+        }
       }
     }
   }
