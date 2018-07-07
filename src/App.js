@@ -310,6 +310,17 @@ class App extends Component {
     this.setState({loggedIn: false, error: 'switch'})
   }
 
+  logout = () => {
+    this.setState({
+      loggedIn: false,
+      error: null,
+      topArtists: {numResults: null, timeRange: null, data: null},
+      topTracks: {numResults: null, timeRange: null, data: null},
+      user: {username: null, image: null, url: null},
+    })
+    window.history.pushState({}, document.title, "/");
+  }
+
   setModal = (url) => {
     this.setState({modal: url});
   }
@@ -337,7 +348,7 @@ class App extends Component {
           <div className="navigation">
             <MainMenu handler={this.setModal} />
             <div className="site-title">My Top for Spotify</div>
-            <UserMenu user={user} handler={this.switchUser}/>
+            <UserMenu user={user} switchHandler={this.switchUser} logoutHandler={this.logout}/>
           </div>
           <div className="tabs">
             <button className={"tab" + (this.state.isArtists ? '' : ' active')} onClick={() => {this.nowIsArtist(false)}}>

@@ -24,7 +24,12 @@ class UserMenu extends Component {
 
   switchUser() {
     this.setState({menuActive: false});
-    this.props.handler();
+    this.props.switchHandler();
+  }
+
+  logout() {
+    this.setState({menuActive: false});
+    this.props.logoutHandler();
   }
 
   render() {
@@ -46,6 +51,7 @@ class UserMenu extends Component {
           <ul>
             <li><a href={user.url} target="_blank" rel="noopener noreferrer">View Profile</a></li>
             <li><a role="button" onClick={() => {this.switchUser()}}>Switch User</a></li>
+            <li><a role="button" onClick={() => {this.logout()}}>Log Out</a></li>
           </ul>
         </div>
       </div>
