@@ -1,6 +1,6 @@
 {
   "name": "my-top-spotify-web-client",
-  "version": "0.1.0",
+  "version": "0.9.0",
   "description": "React-based web client for My Top Spotify by Alistair Shepherd",
   "scripts": {
     "start": "react-scripts start",

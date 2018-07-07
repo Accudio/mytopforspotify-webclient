@@ -17,10 +17,11 @@ To start the development server, run:
 
     $ npm start
 
-Then open `http://localhost:3000` in a browser. For more information on building the client and deployment see [create-react-app.md]
+Then open `http://localhost:3000` in a browser. For more information on building the client and deployment see [create-react-app.md][createreactappmd]
 
 ## Version History
 
+- v0.9.0 - First release of beta version. Includes full intended fucntionality and design.
 - v0.1.0 - Initial Release
 
 [url]:https://mytopspotify.io/
