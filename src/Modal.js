@@ -31,6 +31,7 @@ class Modal extends Component {
                   <li><a href="https://sarcadass.github.io/granim.js/">Granim.js</a></li>
                   <li><a href="https://github.com/Pomax/react-onclickoutside">react-onclickoutside</a></li>
                   <li><a href="https://github.com/Grsmto/simplebar">SimpleBar</a></li>
+                  <li><a href="https://netlify.com">Netlify</a></li>
                 </ul>
                 <h2>Server</h2>
                 <p>The My Top for Spotify authentication server is powered by <a href="https://nodejs.org/en/">Node.js</a> and <a href="https://expressjs.com/">Express</a> and hosted using <a href="https://serverless.com/">Serverless</a> on <a href="https://aws.amazon.com/lambda/">AWS Lambda</a>.</p>
