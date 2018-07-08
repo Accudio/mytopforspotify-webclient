@@ -7,7 +7,6 @@ import faBars from '@fortawesome/fontawesome-free-solid/faBars'
 import faPaypal from '@fortawesome/fontawesome-free-brands/faPaypal'
 import faLink from '@fortawesome/fontawesome-free-solid/faLink'
 
-import './fonts.css';
 import './MainMenu.css';
 
 class MainMenu extends Component {

@@ -5,7 +5,6 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import faCaretDown from '@fortawesome/fontawesome-free-solid/faCaretDown'
 import faUser from '@fortawesome/fontawesome-free-solid/faUser'
 
-import './fonts.css';
 import './UserMenu.css';
 
 class UserMenu extends Component {

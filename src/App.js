@@ -6,7 +6,6 @@ import 'simplebar';
 import 'react-select/dist/react-select.css';
 import 'simplebar/dist/simplebar.css';
 
-import './fonts.css';
 import Util from './util';
 import Background from './Background';
 import Login from './Login';
@@ -112,6 +111,7 @@ class App extends Component {
       error: null,
       user: {username: null, image: null, url: null},
       userMenuActive: false,
+      loading: true,
       numResults: {value: 10, label: 'Top 10'},
       timeRange: {value: 'medium_term', label: 'in the past 6 Months'},
       topTracks: {numResults: null, timeRange: null, data: null},
@@ -261,7 +261,7 @@ class App extends Component {
                   for(var j = 0; j < response.artists.length; j++ ) {
                     topTracks[j].genres = response.artists[j].genres
                   }
-                  this.setState({topTracks: {numResults: numResults, timeRange: timeRange, data: topTracks}});
+                  this.setState({topTracks: {numResults: numResults, timeRange: timeRange, data: topTracks, loading: false}});
                 });
             } else {
               console.log('request failed')
@@ -347,15 +347,15 @@ class App extends Component {
           <Background id="background" config={ this.state.background }></Background>
           <div className="navigation">
             <MainMenu handler={this.setModal} />
-            <div className="site-title">My Top for Spotify</div>
+            <div className="site-title"><h1>My Top for Spotify</h1></div>
             <UserMenu user={user} switchHandler={this.switchUser} logoutHandler={this.logout}/>
           </div>
           <div className="tabs">
             <button className={"tab" + (this.state.isArtists ? '' : ' active')} onClick={() => {this.nowIsArtist(false)}}>
-              Top Tracks
+              <h2>Top Tracks</h2>
             </button>
             <button className={"tab" + (this.state.isArtists ? ' active' : '')} onClick={() => {this.nowIsArtist(true)}}>
-              Top Artists
+              <h2>Top Artists</h2>
             </button>
           </div>
           <div className="page-wrap">

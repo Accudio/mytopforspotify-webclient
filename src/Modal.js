@@ -4,7 +4,6 @@ import onClickOutside from "react-onclickoutside";
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import faTimes from '@fortawesome/fontawesome-free-solid/faTimes'
 
-import './fonts.css';
 import './Modal.css';
 
 class Modal extends Component {
@@ -54,7 +53,7 @@ class Modal extends Component {
                 <h3>Opt-out of tracking</h3>
                 <p>We would really appreciate if users let us collect information about their visit to mytopspotify.io as it allows us to improve our website and services based upon user interaction. If you do not wish to be tracked however, we respects your browsers 'Do Not Track' setting or you can opt out of tracking below. This stores an anonymised non-expiring cookie in your browser that we use to identify devices that should not be tracked.</p>
                 <hr />
-                <p>TODO SET UP ANALYTICS OPT OUT{/*<iframe style="border: 0; width: 100%;" src="{PIWIK ANALYTICS URL}" width="300" height="150"></iframe>*/}</p>
+                <iframe style={{border: 0, width: '100%'}} src="https://analytics.accudio.com/index.php?module=CoreAdminHome&action=optOut&idsite=9&language=en" title="Analytics opt-out"></iframe>
                 <hr />
                 <h3>Gathering of Personally-Identifying Information</h3>
                 <p>Certain aspects of mytopspotify.io have facilities to collect personal information for a specific purpose. For example, in our contact form. This information is only stored for the purpose of responding to contact form submissions, and will never be disclosed to any persons outside of MTfS. Visitors are also of course able to refuse to supply this information by not using our contact form and getting in touch with us through other means.</p>

@@ -7,7 +7,6 @@ import faPaypal from '@fortawesome/fontawesome-free-brands/faPaypal'
 import faLink from '@fortawesome/fontawesome-free-solid/faLink'
 import faTimes from '@fortawesome/fontawesome-free-solid/faTimes'
 
-import './fonts.css';
 import './Login.css';
 
 class Login extends Component {
