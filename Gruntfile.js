@@ -13,6 +13,10 @@ module.exports = function(grunt) {
         files: ['src/**.scss'],
         tasks: ['css']
       },
+      puliccss: {
+        files: ['publicsrc/**.scss'],
+        tasks: ['publiccss']
+      },
       img: {
         files: ['src/img/**'],
         tasks: ['img']
@@ -37,6 +41,15 @@ module.exports = function(grunt) {
           dest: 'src/',
           ext: '.css'
         }]
+      },
+      public: {
+        files: [{
+          expand: true,
+          cwd: 'publicsrc/',
+          src: ['**.scss'],
+          dest: 'public/',
+          ext: '.css'
+        }]
       }
     },
 
@@ -57,6 +70,20 @@ module.exports = function(grunt) {
           cwd: 'src/',
           src: ['**.css'],
           dest: 'src/'
+        }]
+      },
+      public: {
+        options: {
+          processors: [
+            require('postcss-normalize')(), // produce normalize based on browserlist
+            require('autoprefixer')(), // add vendor prefixes
+          ]
+        },
+        files: [{
+          expand: true,
+          cwd: 'public/',
+          src: ['**.css'],
+          dest: 'public/'
         }]
       }
     },
@@ -88,8 +115,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-imagemin');
 
   // register tasks
-  grunt.registerTask('css', ['sass', 'postcss']);
+  grunt.registerTask('css', ['sass:app', 'postcss:app']);
+  grunt.registerTask('publiccss', ['sass:public', 'postcss:public']);
   grunt.registerTask('img', 'imagemin');
-  grunt.registerTask('default', ['css', 'img'])
+  grunt.registerTask('default', ['css', 'publiccss', 'img'])
 
 };
