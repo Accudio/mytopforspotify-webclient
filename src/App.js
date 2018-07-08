@@ -104,7 +104,6 @@ class App extends Component {
     const token = params.access_token;
     if (token) {
       spotifyApi.setAccessToken(token);
-      console.log('Access Token: '+token)
     }
     this.state = {
       loggedIn: token ? true : false,
@@ -143,8 +142,6 @@ class App extends Component {
       this.getUser();
       this.getTop(this.state.numResults.value, this.state.timeRange.value, this.state.isArtists);
       this.getTop(this.state.numResults.value, this.state.timeRange.value, !this.state.isArtists);
-    } else {
-      console.log('not logged in yet');
     }
   }
 
@@ -162,7 +159,6 @@ class App extends Component {
   getUser() {
     spotifyApi.getMe()
       .then((response) => {
-        console.log(response);
         let username, image;
         if(response.display_name != null) {
           username = response.display_name;
