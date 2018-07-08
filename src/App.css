@@ -1,14 +1,312 @@
-* {
+.app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding-top: 4rem;
+  font-family: 'Source Sans Pro', sans-serif;
+  width: 100%;
+}
+@media screen and (min-width: 576px) {
+  .app {
+    width: 540px;
+    padding-top: 6rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .app {
+    width: 720px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .app {
+    width: 960px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .app {
+    width: 1140px;
+  }
+}
+.app .main-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.app .main-content .navigation {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  background-color: #191414;
+  height: 4rem;
+  z-index: 10;
+}
+.app .main-content .navigation .site-title {
+  cursor: default;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  color: #ffffff;
+}
+.app .main-content .navigation .site-title h1 {
+  font-family: 'Vollkorn', serif;
+  font-size: 1.5rem;
   margin: 0;
-  box-sizing: border-box;
 }
-
-#root {
-  margin: 10px;
+.app .main-content .tabs {
+  display: flex;
+  justify-content: space-around;
 }
-
-.album-art {
-  width: 100px;
-  height: 100px;
-  background-color: #ccc;
+.app .main-content .tabs .tab {
+  flex: 1;
+  padding: .5rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  background-color: #191414;
+  font-variant: small-caps;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #eeeeee;
+  box-shadow: inset 0px 0px 0px -2px #1DB954;
+  transition: box-shadow .4s;
+}
+@media screen and (min-width: 576px) {
+  .app .main-content .tabs .tab {
+    margin: 0 3%;
+    padding: .7rem 0;
+  }
+}
+.app .main-content .tabs .tab h2 {
+  font-size: inherit;
+  margin: 0;
+}
+.app .main-content .tabs .tab:hover {
+  box-shadow: inset 0px -4px 0px -2px rgba(29, 185, 84, 0.5);
+}
+.app .main-content .tabs .tab.active {
+  box-shadow: inset 0px -4px 0px -2px #1DB954;
+}
+.app .main-content .page-wrap {
+  flex: 1;
+  background-color: rgba(25, 20, 20, 0.6);
+  border: 2px solid #191414;
+  border-bottom: none;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+.app .main-content .page-wrap .config-options {
+  padding: 1rem 1rem 0;
+}
+.app .main-content .page-wrap .config-options .Select {
+  float: left;
+  width: 100%;
+  margin-bottom: .3rem;
+}
+@media screen and (min-width: 576px) {
+  .app .main-content .page-wrap .config-options .Select {
+    width: 49%;
+    margin-bottom: 0;
+  }
+}
+.app .main-content .page-wrap .config-options .Select:nth-child(even) {
+  float: right;
+}
+.app .main-content .page-wrap .config-options .Select .Select-control {
+  background: none;
+  border: rgba(255, 255, 255, 0.7) solid 1px;
+}
+.app .main-content .page-wrap .config-options .Select .Select-control .Select-input > input {
+  color: #ffffff;
+}
+.app .main-content .page-wrap .config-options .Select .Select-control .Select-input:focus {
+  background: none;
+}
+.app .main-content .page-wrap .config-options .Select .Select-control .Select-value-label {
+  color: #ffffff !important;
+  font-size: 1.2rem;
+}
+.app .main-content .page-wrap .config-options .Select .Select-control .Select-arrow {
+  border-color: rgba(255, 255, 255, 0.7) transparent transparent;
+}
+.app .main-content .page-wrap .config-options .Select.is-open .Select-arrow {
+  border-color: transparent transparent rgba(255, 255, 255, 0.7);
+}
+.app .main-content .page-wrap .page {
+  overflow-y: auto;
+  flex: 1;
+}
+.app .main-content .page-wrap .page .page-content {
+  padding: 2rem 1rem;
+  opacity: 1;
+  transition: opacity .3s linear;
+}
+.app .main-content .page-wrap .page .page-content.hidden {
+  opacity: 0;
+}
+.app .main-content .page-wrap .page .page-content .results {
+  list-style: none;
+  padding: 0;
+  counter-reset: li;
+}
+.app .main-content .page-wrap .page .page-content .results > li {
+  position: relative;
+  margin-left: 1rem;
+}
+@media screen and (min-width: 576px) {
+  .app .main-content .page-wrap .page .page-content .results > li {
+    margin-left: 6rem;
+  }
+}
+.app .main-content .page-wrap .page .page-content .results > li:before {
+  content: counter(li);
+  counter-increment: li;
+  position: absolute;
+  font-size: 6rem;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.3);
+  left: -1rem;
+}
+@media screen and (min-width: 576px) {
+  .app .main-content .page-wrap .page .page-content .results > li:before {
+    left: -2rem;
+  }
+}
+.app .main-content .page-wrap .page .page-content .results > li .list-item {
+  display: flex;
+  padding-left: 1rem;
+  margin-bottom: 2.5rem;
+  flex-flow: column-reverse;
+}
+@media screen and (min-width: 576px) {
+  .app .main-content .page-wrap .page .page-content .results > li .list-item {
+    flex-flow: row;
+    padding-right: 1rem;
+  }
+}
+.app .main-content .page-wrap .page .page-content .results > li .list-item .list-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-top: 1rem;
+  text-align: center;
+}
+@media screen and (min-width: 576px) {
+  .app .main-content .page-wrap .page .page-content .results > li .list-item .list-text {
+    margin-top: 0;
+    text-align: right;
+    margin-right: 1rem;
+  }
+}
+.app .main-content .page-wrap .page .page-content .results > li .list-item .list-text .name {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.app .main-content .page-wrap .page .page-content .results > li .list-item .list-text .name span {
+  display: inline-block;
+  position: relative;
+}
+.app .main-content .page-wrap .page .page-content .results > li .list-item .list-text .name span:after {
+  content: '';
+  width: 100%;
+  height: 1px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+}
+.app .main-content .page-wrap .page .page-content .results > li .list-item .list-text .genres.none {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.6);
+}
+.app .main-content .page-wrap .page .page-content .results > li .list-item .image {
+  margin-left: auto;
+  margin-right: auto;
+}
+@media screen and (min-width: 576px) {
+  .app .main-content .page-wrap .page .page-content .results > li .list-item .image {
+    margin-right: 0;
+  }
+}
+.app .main-content .page-wrap .page .page-content .results a {
+  color: #ffffff;
+}
+.app .main-content .page-wrap .page .page-content .view-more {
+  display: block;
+  cursor: pointer;
+  font-weight: bold;
+  color: #ffffff;
+  background: none;
+  border: 1px #ffffff solid;
+  border-radius: 4px;
+  padding: 1rem 5rem;
+  margin: 0 auto;
+}
+.app .main-content .page-wrap .page .loading {
+  text-align: center;
+  padding: 2rem 0;
+  color: rgba(255, 255, 255, 0.5);
+}
+.app .main-content .page-wrap .page .loading.hidden {
+  display: none;
+}
+.app .login {
+  z-index: 11;
+}
+.app .login .login-window {
+  visibility: hidden;
+  opacity: 0;
+  transition: all .3s;
+}
+.app .login.active .login-window {
+  visibility: visible;
+  opacity: 1;
+}
+.app .modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(25, 20, 20, 0.5);
+  z-index: 12;
+  visibility: hidden;
+  opacity: 0;
+  transition: all .5s;
+  padding-top: 2rem;
+  /* Modal pages */
+}
+@media screen and (min-width: 576px) {
+  .app .modal {
+    padding-top: 6rem;
+  }
+}
+.app .modal.active {
+  visibility: visible;
+  opacity: 1;
+}
+.app .modal h1, .app .modal h2, .app .modal h3, .app .modal h4, .app .modal h5 {
+  font-family: 'vollkorn';
+  margin: 1.5rem 0 .5rem;
+}
+.app .modal p {
+  margin: .5rem 0;
+}
+.app .modal a {
+  color: currentColor;
+}
+.app .modal ol {
+  margin: 1rem 0;
+}
+.app .modal ol li {
+  margin-bottom: .5rem;
 }

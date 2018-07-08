@@ -1,0 +1,122 @@
+@import 'variables';
+
+.menu {
+  margin-right: auto;
+  margin-left: .5rem;
+
+  @media screen and (min-width: 576px) {
+    margin-left: 2rem;
+    min-width: 12.7rem;
+    position: relative;
+  }
+
+  button {
+    font-size: 1rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 .5rem;
+    height: 100%;
+    color: $white;
+    font-family: 'Source Sans Pro', sans-serif;
+    outline: none;
+
+    .menu-text {
+      display: none;
+      margin-left: .5rem;
+      @media screen and (min-width: 576px) {
+        display: inline;
+      }
+      .fa-caret-down {
+        margin-left: .5rem;
+      }
+    }
+
+    .menu-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 2.5rem;
+      width: 2.5rem;
+      border-radius: 50%;
+      overflow: hidden;
+      opacity: .8;
+
+      &.icon {
+        border: 2px solid $white;
+      }
+    }
+  }
+
+  .main-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: $black;
+    width: 100%;
+    min-width: 15rem;
+    border-radius: 0 0 5px 5px;
+    border-top: 1px solid rgba($white, .3);
+    border-bottom: 1px solid rgba($white, .3);
+    visibility: hidden;
+    opacity: 0;
+    transition: all .2s;
+
+    @media screen and (min-width: 576px) {
+      background: $white;
+      border: 1px solid rgba($black, .3);
+      border-top: none;
+    }
+
+    &.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        border-bottom: 1px solid rgba($white, .1);
+        @media screen and (min-width: 576px) {
+          border-bottom: 1px solid rgba($black, .1);
+        }
+
+        a {
+          cursor: pointer;
+          display: block;
+          padding: 1rem;
+          color: rgba($white, .9);
+          text-decoration: none;
+          transition: background .3s;
+
+          @media screen and (min-width: 576px) {
+            color: rgba($black, .9);
+            padding: .5rem;
+          }
+
+          &:hover {
+            background: rgba($white, .05);
+            @media screen and (min-width: 576px) {
+              background: rgba($black, .05);
+            }
+          }
+
+          span {
+            color: rgba($black, .4);
+            position: absolute;
+            right: .8rem;
+          }
+        }
+
+        &:last-child {
+          border: none;
+        }
+      }
+    }
+  }
+}

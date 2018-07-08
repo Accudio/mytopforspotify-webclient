@@ -1,6 +1,6 @@
 {
   "name": "my-top-spotify-web-client",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "React-based web client for My Top Spotify by Alistair Shepherd",
   "scripts": {
     "start": "react-scripts start",
@@ -10,18 +10,38 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Accudio/my-top-spotify-web-client.git"
+    "url": "git+https://bitbucket.com/mytopspotify/web-client.git"
   },
+  "private": true,
   "author": "Alistair Shepherd <alistair@accudio.com>",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/Accudio/my-top-spotify-server/issues"
+    "url": "https://bitbucket.com/mytopspotify/web-client/issues"
   },
-  "homepage": "https://github.com/Accudio/my-top-spotify-web-client#readme",
+  "homepage": "https://mytopspotify.io",
   "dependencies": {
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free-brands": "^5.0.13",
+    "@fortawesome/fontawesome-free-regular": "^5.0.13",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
+    "@fortawesome/react-fontawesome": "0.0.20",
+    "autoprefixer": "^8.6.2",
+    "granim": "^1.1.1",
+    "grunt": "^1.0.3",
+    "grunt-contrib-imagemin": "^2.0.1",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-postcss": "^0.9.0",
+    "imagemin-gifsicle": "^5.2.0",
+    "imagemin-mozjpeg": "^7.0.0",
+    "imagemin-pngquant": "^5.1.0",
+    "postcss-normalize": "^5.0.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-onclickoutside": "^6.7.1",
     "react-scripts": "1.1.4",
+    "react-select": "^1.2.1",
+    "simplebar": "^2.6.1",
     "spotify-web-api-js": "^0.24.0"
   }
 }
