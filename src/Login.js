@@ -64,10 +64,10 @@ class Login extends Component {
           <a href={url} className="login-button">{button}</a>
           <div className="login-footer">
             <ul className="icons">
-              <li><a href="https://twitter.com/accudio" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faTwitter} /></a></li>
-              <li><a href="https://github.com/accudio" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub} /></a></li>
-              <li><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=alistair.shepherd@hotmail.co.uk&item_name=Supporting+open+source+projects+by+Alistair+Shepherd&currency_code=GBP" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faPaypal} /></a></li>
-              <li><a href="https://alistairshepherd.co.uk" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLink} /></a></li>
+              <li><a href="https://twitter.com/accudio" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faTwitter} /><span className="sr-text">Alistair Shepherd on Twitter</span></a></li>
+              <li><a href="https://github.com/accudio" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub} /><span className="sr-text">Alistair Shepherd on Github</span></a></li>
+              <li><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=alistair.shepherd@hotmail.co.uk&item_name=Supporting+open+source+projects+by+Alistair+Shepherd&currency_code=GBP" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faPaypal} /><span className="sr-text">Donate to Alistair Shepherd</span></a></li>
+              <li><a href="https://alistairshepherd.co.uk" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLink} /><span className="sr-text">Alistair Shepherd's Website</span></a></li>
             </ul>
             <span>Built by Alistair Shepherd</span>
             <ul className="links">
