@@ -21,7 +21,8 @@ Then open `http://localhost:3000` in a browser. For more information on building
 
 ## Version History
 
-- v0.9.0 - First release of beta version. Includes full intended fucntionality and design.
+- v1.0.0 - 1.0 release. Fully meets initial specification
+- v0.9.0 - First release of beta version. Includes full intended functionality and design.
 - v0.1.0 - Initial Release
 
 [url]:https://mytopspotify.io/

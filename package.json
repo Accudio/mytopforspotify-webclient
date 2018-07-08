@@ -1,6 +1,6 @@
 {
   "name": "my-top-spotify-web-client",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "description": "React-based web client for My Top Spotify by Alistair Shepherd",
   "scripts": {
     "start": "react-scripts start",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://bitbucket.com//mytopspotify/web-client.git"
+    "url": "git+https://bitbucket.com/mytopspotify/web-client.git"
   },
   "private": true,
   "author": "Alistair Shepherd <alistair@accudio.com>",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/Accudio/my-top-spotify-server/issues"
+    "url": "https://bitbucket.com/mytopspotify/web-client/issues"
   },
-  "homepage": "https://mytopspotify-beta.surge.sh/",
+  "homepage": "https://mytopspotify.io",
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.8",
     "@fortawesome/fontawesome-free-brands": "^5.0.13",
