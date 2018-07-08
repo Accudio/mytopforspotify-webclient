@@ -10,8 +10,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Accudio/my-top-spotify-web-client.git"
+    "url": "git+https://bitbucket.com//mytopspotify/web-client.git"
   },
+  "private": true,
   "author": "Alistair Shepherd <alistair@accudio.com>",
   "license": "Apache-2.0",
   "bugs": {

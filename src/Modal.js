@@ -33,7 +33,7 @@ class Modal extends Component {
                   <li><a href="https://github.com/Grsmto/simplebar">SimpleBar</a></li>
                 </ul>
                 <h2>Server</h2>
-                <p>Information on the My Top for Spotify authentication server is available at the projects <a href="https://github.com/accudio/my-top-spotify-server">Github</a>. It is powered by <a href="https://nodejs.org/en/">Node.js</a> and <a href="https://expressjs.com/">Express</a> and hosted using <a href="https://serverless.com/">Serverless</a> on <a href="https://aws.amazon.com/lambda/">AWS Lambda</a>.</p>
+                <p>The My Top for Spotify authentication server is powered by <a href="https://nodejs.org/en/">Node.js</a> and <a href="https://expressjs.com/">Express</a> and hosted using <a href="https://serverless.com/">Serverless</a> on <a href="https://aws.amazon.com/lambda/">AWS Lambda</a>.</p>
               </div>
           </div>
         }
