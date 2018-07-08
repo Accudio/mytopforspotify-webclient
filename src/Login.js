@@ -15,7 +15,7 @@ class Login extends Component {
     this.state = {
       button: 'Log in to Spotify',
       url: 'https://login.mytopspotify.io/',
-      text: 'Your most played tracks and artists on Spotify in four weeks,  six months, all time!',
+      text: 'Your most played tracks and artists on Spotify of the last four weeks, six months or all time!',
       text2: 'Login below to get started'
     }
   }
