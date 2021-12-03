@@ -45,21 +45,21 @@
     <title>My Top for Spotify</title>
     <meta name="description" content="Your most played tracks and artists on Spotify of the last four weeks, six months or all time!">
 
-    <!-- Matomo -->
-    <script type="text/javascript">
-      var _paq = _paq || [];
-      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-      _paq.push(['trackPageView']);
-      _paq.push(['enableLinkTracking']);
+    <script>
+      var Countly = Countly || {};
+      Countly.q = Countly.q || [];
+      Countly.app_key = "61aa4f28d28b0435746e1571";
+      Countly.url = "https://analytics2.accudio.com";
+      Countly.q.push(['track_sessions']);
+      Countly.q.push(['track_pageview']);
       (function() {
-        var u="//analytics.accudio.com/";
-        _paq.push(['setTrackerUrl', u+'piwik.php']);
-        _paq.push(['setSiteId', '9']);
-        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      var cly = document.createElement('script');
+      cly.async = true;
+      cly.src = '/countly.js';
+      cly.onload = function(){Countly.init()};
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(cly, s);
       })();
     </script>
-    <!-- End Matomo Code -->
   </head>
   <body>
     <noscript>
